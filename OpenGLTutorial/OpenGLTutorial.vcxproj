@@ -155,6 +155,7 @@
     <ClInclude Include="Tut2.h" />
     <ClInclude Include="Tut3.h" />
     <ClInclude Include="Tut4.h" />
+    <ClInclude Include="Tut5.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
