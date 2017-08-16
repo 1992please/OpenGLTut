@@ -13,10 +13,22 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{d9afe623-8a1f-442a-953b-174119fff6a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Texture.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Controls.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\objloader.cpp">
+      <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +42,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tut5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Texture.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Controls.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="Tut6.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\objloader.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="Tut7.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

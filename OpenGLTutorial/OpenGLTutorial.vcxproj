@@ -149,13 +149,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="common\Controls.cpp" />
+    <ClCompile Include="common\objloader.cpp" />
+    <ClCompile Include="common\Texture.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common\Controls.hpp" />
+    <ClInclude Include="common\objloader.h" />
+    <ClInclude Include="common\Texture.h" />
     <ClInclude Include="Tut2.h" />
     <ClInclude Include="Tut3.h" />
     <ClInclude Include="Tut4.h" />
     <ClInclude Include="Tut5.h" />
+    <ClInclude Include="Tut6.h" />
+    <ClInclude Include="Tut7.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

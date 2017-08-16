@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,13 +6,13 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
+#include "common\Texture.h"
 #include <GL\glew.h>
 
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
-using namespace glm;
+
 
 static GLuint vertexbuffer;
 static GLuint uvbuffer;
@@ -24,8 +23,6 @@ static GLuint TextureID;
 static glm::mat4 MVP;
 
 GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path);
-
-GLuint loadBMP_custom(const char * imagepath);
 
 int GlewCheck()
 {
@@ -171,7 +168,7 @@ void Start()
 	// create and compile our GLSL program from the shaders
 	programID = LoadShaders("shaders\\SimpleVertexShader5.vertexshader", "shaders\\SimpleFragmentShader5.fragmentshader");
 
-	Texture = loadBMP_custom("textures/uvtemplate.bmp");
+	Texture = loadDDS("textures/uvtemplate1.dds");
 
 	// get a handle for our "MVP" uniform
 	MatrixID = glGetUniformLocation(programID, "MVP");
@@ -323,58 +320,4 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 	glDeleteShader(FragmentShaderID);
 
 	return ProgramID;
-}
-
-GLuint loadBMP_custom(const char* imagepath)
-{
-	// Data read from the header of the BMP file
-	unsigned char header[54]; // Each BMP file begins by a 54-bytes header
-	unsigned int dataPos;	  // Position in the file where the actual data begins
-	unsigned int width, height;
-	unsigned int imageSize; // = width * height * 3
-	// Actual RGB data
-	unsigned char* data;
-
-	FILE* file = fopen(imagepath, "rb");
-	if (!file) { printf("image could not be opened\n"); return 0; }
-
-	if (fread(header, 1, 54, file) != 54)
-	{
-		printf("Not a correct BMP file\n");
-		return false;
-	}
-
-	if (header[0] != 'B' || header[1] != 'M')
-	{
-		printf("Not a correct BMP file\n");
-		return 0;
-	}
-	// Read ints from the byte array
-	dataPos = *(int*)&(header[0x0A]);
-	imageSize = *(int*)&(header[0x22]);
-	width = *(int*)&(header[0x12]);
-	height = *(int*)&(header[0x16]);
-
-	// Some BMP files are misformatted, guess missing information
-	if (imageSize == 0)    imageSize = width*height * 3; // 3 : one byte for each Red, Green and Blue component
-	if (dataPos == 0)      dataPos = 54; // The BMP header is done that way
-
-	data = new unsigned char[imageSize];
-	fread(data, 1, imageSize, file);
-	fclose(file);
-
-	GLuint textureID;
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
-
-	// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	// Generate mipmaps, by the way.
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	return textureID;
 }

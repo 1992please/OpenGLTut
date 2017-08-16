@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Tut5.h"
+#include "Tut7.h"
 #include <GLFW\glfw3.h>
 
 
@@ -42,7 +42,7 @@ int MainProgram()
 	do
 	{
 		// Draw nothing, see you in tutorial 2 !
-		Update();
+		Update(window);
 		// Swap buffers
 		glfwSwapBuffers(window);
 		glfwPollEvents();
